@@ -141,14 +141,17 @@
         }
         #game-container {
             background-color: #0f3460;
-            padding: 2rem;
+            padding: 1rem;
             border-radius: 16px;
             border: 4px solid #e94560;
             text-align: center;
+            width: 95vw;
+            max-width: 480px;
         }
         #snake-game {
             background-color: #1a1a2e;
             border: 2px solid #e0e0e0;
+            max-width: 100%;
         }
 
         /* D-Pad controls for mobile */
@@ -395,7 +398,7 @@
     <div id="game-modal">
         <div id="game-container">
             <h2 class="font-press-start text-2xl mb-4">Secret Snake Game!</h2>
-            <canvas id="snake-game" width="400" height="400"></canvas>
+            <canvas id="snake-game"></canvas>
             <div class="mt-4 flex justify-between items-center">
                  <p id="score-display" class="font-press-start text-lg">Score: 0</p>
                  <div>
@@ -455,6 +458,16 @@
 
         const gridSize = 20;
         let snake, food, score, direction, gameLoop, gameState, changingDirection;
+
+        function resizeCanvas() {
+            const container = document.getElementById('game-container');
+            const style = window.getComputedStyle(container);
+            const paddingX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+            const containerWidth = container.clientWidth - paddingX;
+            const newSize = Math.floor(containerWidth / gridSize) * gridSize;
+            canvas.width = newSize;
+            canvas.height = newSize;
+        }
 
         function initGame() {
             snake = [{ x: 10, y: 10 }];
@@ -586,6 +599,7 @@
 
         heroCharacter.addEventListener('click', () => {
             gameModal.style.display = 'flex';
+            resizeCanvas();
         });
 
         closeGameBtn.addEventListener('click', () => {
@@ -603,6 +617,15 @@
             if (e.target.classList.contains('d-pad-btn')) {
                 const newDirection = e.target.dataset.direction;
                 setDirection(newDirection);
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (gameModal.style.display === 'flex') {
+                resizeCanvas();
+                if (gameState) {
+                    draw();
+                }
             }
         });
 
