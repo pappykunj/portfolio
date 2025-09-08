@@ -125,6 +125,60 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Hidden Game Styles */
+        #game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        #game-container {
+            background-color: #0f3460;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 4px solid #e94560;
+            text-align: center;
+        }
+        #snake-game {
+            background-color: #1a1a2e;
+            border: 2px solid #e0e0e0;
+        }
+
+        /* D-Pad controls for mobile */
+        .d-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0.5rem;
+            width: 150px;
+            height: 150px;
+            margin: 1rem auto 0;
+        }
+        .d-pad-btn {
+            background-color: #e94560;
+            color: white;
+            font-size: 24px;
+            border-radius: 8px;
+            border: 2px solid #1a1a2e;
+            box-shadow: 2px 2px 0px #0f3460;
+            user-select: none; /* Prevent text selection on tap */
+        }
+         .d-pad-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px #0f3460;
+        }
+        #d-pad-up { grid-area: 1 / 2 / 2 / 3; }
+        #d-pad-left { grid-area: 2 / 1 / 3 / 2; }
+        #d-pad-right { grid-area: 2 / 3 / 3 / 4; }
+        #d-pad-down { grid-area: 3 / 2 / 4 / 3; }
+
     </style>
 </head>
 <body class="relative">
@@ -156,14 +210,13 @@
     <main class="container mx-auto px-4 pt-32">
         <section class="min-h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left">
             <div class="md:w-1/2 relative">
-                <div class="w-64 h-64 md:w-80 md:h-80 mx-auto floating">
-                    <!-- Placeholder for a pixel art character -->
+                <div id="hero-character" class="w-64 h-64 md:w-80 md:h-80 mx-auto floating cursor-pointer" title="Click me!">
                     <svg viewBox="0 0 100 100" class="w-full h-full">
                         <defs>
-                           <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" style="stop-color:#ff5e78;stop-opacity:1" />
-                              <stop offset="100%" style="stop-color:#e94560;stop-opacity:1" />
-                           </linearGradient>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#ff5e78;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#e94560;stop-opacity:1" />
+                            </linearGradient>
                         </defs>
                         <path d="M50 0 L65 25 L90 25 L75 45 L85 70 L50 60 L15 70 L25 45 L10 25 L35 25 Z" fill="url(#grad1)"/>
                         <circle cx="50" cy="50" r="20" fill="#1a1a2e"/>
@@ -189,12 +242,12 @@
             <div class="glass-card p-8 flex flex-col md:flex-row items-center gap-8">
                  <div class="w-32 h-32 flex-shrink-0">
                      <svg viewBox="0 0 100 100" class="w-full h-full">
-                        <rect x="10" y="10" width="80" height="80" rx="15" fill="#0f3460" />
-                        <text x="50" y="60" font-family="'Press Start 2P', cursive" font-size="30" fill="white" text-anchor="middle">AG</text>
+                         <rect x="10" y="10" width="80" height="80" rx="15" fill="#0f3460" />
+                         <text x="50" y="60" font-family="'Press Start 2P', cursive" font-size="30" fill="white" text-anchor="middle">AG</text>
                      </svg>
                  </div>
                  <div>
-                    <p class="text-lg leading-relaxed">I'm a motivated game developer with solid experience across mobile and PC platforms. I'm passionate about building engaging gameplay systems and interactive experiences. With a foundation in Information Technology and hands-on experience in the industry, I'm eager to learn, expand my opportunities, and contribute to innovative game development projects.</p>
+                     <p class="text-lg leading-relaxed">I'm a motivated game developer with solid experience across mobile and PC platforms. I'm passionate about building engaging gameplay systems and interactive experiences. With a foundation in Information Technology and hands-on experience in the industry, I'm eager to learn, expand my opportunities, and contribute to innovative game development projects.</p>
                  </div>
             </div>
         </section>
@@ -337,6 +390,31 @@
     <footer class="text-center py-8 text-gray-500">
         <p>&copy; 2024 Angela Maria Gigi. Designed with <span class="text-e94560">&lt;3</span></p>
     </footer>
+    
+    <!-- Hidden Game Modal -->
+    <div id="game-modal">
+        <div id="game-container">
+            <h2 class="font-press-start text-2xl mb-4">Secret Snake Game!</h2>
+            <canvas id="snake-game" width="400" height="400"></canvas>
+            <div class="mt-4 flex justify-between items-center">
+                 <p id="score-display" class="font-press-start text-lg">Score: 0</p>
+                 <div>
+                    <button id="start-game-btn" class="pixel-btn text-sm py-2 px-4">Start</button>
+                    <button id="close-game-btn" class="pixel-btn text-sm py-2 px-4 ml-2">Close</button>
+                </div>
+            </div>
+            <!-- On-screen controls for mobile -->
+            <div id="on-screen-controls" class="md:hidden">
+                 <div class="d-pad">
+                    <button id="d-pad-up" data-direction="up" class="d-pad-btn">▲</button>
+                    <button id="d-pad-left" data-direction="left" class="d-pad-btn">◄</button>
+                    <button id="d-pad-right" data-direction="right" class="d-pad-btn">►</button>
+                    <button id="d-pad-down" data-direction="down" class="d-pad-btn">▼</button>
+                 </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // Smooth scrolling for navigation links
@@ -364,6 +442,171 @@
         sections.forEach(section => {
             observer.observe(section);
         });
+
+        // --- Hidden Snake Game Logic ---
+        const heroCharacter = document.getElementById('hero-character');
+        const gameModal = document.getElementById('game-modal');
+        const closeGameBtn = document.getElementById('close-game-btn');
+        const startGameBtn = document.getElementById('start-game-btn');
+        const canvas = document.getElementById('snake-game');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('score-display');
+        const onScreenControls = document.getElementById('on-screen-controls');
+
+        const gridSize = 20;
+        let snake, food, score, direction, gameLoop, gameState, changingDirection;
+
+        function initGame() {
+            snake = [{ x: 10, y: 10 }];
+            food = {};
+            score = 0;
+            direction = 'right';
+            gameState = 'playing';
+            changingDirection = false;
+            scoreDisplay.textContent = 'Score: 0';
+            startGameBtn.textContent = 'Restart';
+            generateFood();
+            if (gameLoop) clearInterval(gameLoop);
+            gameLoop = setInterval(mainLoop, 150);
+        }
+
+        function generateFood() {
+            food.x = Math.floor(Math.random() * (canvas.width / gridSize));
+            food.y = Math.floor(Math.random() * (canvas.height / gridSize));
+        }
+
+        function draw() {
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f3460';
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+            });
+
+            ctx.fillStyle = '#e94560';
+            ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+
+            if (gameState === 'gameOver') {
+                ctx.fillStyle = 'rgba(26, 26, 46, 0.75)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.font = "30px 'Press Start 2P'";
+                ctx.textAlign = 'center';
+                ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 20);
+                ctx.font = "20px 'Press Start 2P'";
+                ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
+            }
+        }
+
+        function update() {
+            if (gameState !== 'playing') return;
+            changingDirection = false; // Allow a new turn input for the next frame
+
+            const head = { ...snake[0] };
+
+            if (direction === 'right') head.x++;
+            if (direction === 'left') head.x--;
+            if (direction === 'up') head.y--;
+            if (direction === 'down') head.y++;
+
+            if (head.x * gridSize >= canvas.width || head.x < 0 || head.y * gridSize >= canvas.height || head.y < 0) {
+                endGame();
+                return;
+            }
+
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    endGame();
+                    return;
+                }
+            }
+
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                generateFood();
+            } else {
+                snake.pop();
+            }
+        }
+
+        function mainLoop() {
+            update();
+            draw();
+        }
+
+        function endGame() {
+            clearInterval(gameLoop);
+            gameState = 'gameOver';
+            draw();
+        }
+
+        function setDirection(newDirection) {
+            if (gameState !== 'playing' || changingDirection) return;
+
+            const goingUp = direction === 'up';
+            const goingDown = direction === 'down';
+            const goingLeft = direction === 'left';
+            const goingRight = direction === 'right';
+
+            if (newDirection === 'up' && !goingDown) {
+                direction = 'up';
+                changingDirection = true;
+            }
+            if (newDirection === 'down' && !goingUp) {
+                direction = 'down';
+                changingDirection = true;
+            }
+            if (newDirection === 'left' && !goingRight) {
+                direction = 'left';
+                changingDirection = true;
+            }
+            if (newDirection === 'right' && !goingLeft) {
+                direction = 'right';
+                changingDirection = true;
+            }
+        }
+
+        function handleKeyDown(event) {
+            const keyPressed = event.key.toLowerCase();
+            let newDirection = null;
+
+            if (keyPressed === 'arrowup' || keyPressed === 'w') newDirection = 'up';
+            if (keyPressed === 'arrowdown' || keyPressed === 's') newDirection = 'down';
+            if (keyPressed === 'arrowleft' || keyPressed === 'a') newDirection = 'left';
+            if (keyPressed === 'arrowright' || keyPressed === 'd') newDirection = 'right';
+            
+            if(newDirection) {
+                setDirection(newDirection);
+            }
+        }
+
+        heroCharacter.addEventListener('click', () => {
+            gameModal.style.display = 'flex';
+        });
+
+        closeGameBtn.addEventListener('click', () => {
+            gameModal.style.display = 'none';
+            if (gameLoop) clearInterval(gameLoop);
+            gameState = 'ready';
+            startGameBtn.textContent = 'Start';
+        });
+
+        startGameBtn.addEventListener('click', initGame);
+        window.addEventListener('keydown', handleKeyDown);
+
+        // Event listener for on-screen controls
+        onScreenControls.addEventListener('click', (e) => {
+            if (e.target.classList.contains('d-pad-btn')) {
+                const newDirection = e.target.dataset.direction;
+                setDirection(newDirection);
+            }
+        });
+
     </script>
 </body>
 </html>
+
