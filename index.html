@@ -125,6 +125,42 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Mobile Sidebar Styles */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            height: 100%;
+            background-color: #0f3460;
+            z-index: 1001;
+            transition: right 0.3s ease-in-out;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        #mobile-menu.open {
+            right: 0;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        #overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
 
         /* Hidden Game Styles */
         #game-modal {
@@ -137,7 +173,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 1002; /* Higher than sidebar overlay */
         }
         #game-container {
             background-color: #0f3460;
@@ -193,21 +229,40 @@
         <div class="absolute top-10 right-20 w-16 h-16 bg-blue-500 rounded-full opacity-10 filter blur-xl animate-pulse delay-2000"></div>
         <div class="absolute bottom-5 left-10 w-24 h-24 bg-teal-500 rounded-full opacity-10 filter blur-xl animate-pulse delay-3000"></div>
     </div>
+    
+    <div id="overlay"></div>
 
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 p-4 glass-card mx-4 mt-4">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="font-press-start text-lg text-white">ANGELA MARIA GIGI</a>
+            <a href="#" class="font-press-start text-lg text-white">ANGELA M. GIGI</a>
             <nav class="hidden md:flex space-x-6">
                 <a href="#about" class="hover:text-e94560 transition duration-300">/about</a>
                 <a href="#skills" class="hover:text-e94560 transition duration-300">/skills</a>
                 <a href="#experience" class="hover:text-e94560 transition duration-300">/experience</a>
+                <a href="#education" class="hover:text-e94560 transition duration-300">/education</a>
+                <a href="#certifications" class="hover:text-e94560 transition duration-300">/achievements</a>
                 <a href="#projects" class="hover:text-e94560 transition duration-300">/projects</a>
                 <a href="#contact" class="hover:text-e94560 transition duration-300">/contact</a>
             </nav>
+            <button id="hamburger-btn" class="md:hidden text-white">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Navigation Sidebar -->
+    <nav id="mobile-menu">
+        <a href="#about" class="hover:text-e94560 transition duration-300 text-2xl">/about</a>
+        <a href="#skills" class="hover:text-e94560 transition duration-300 text-2xl">/skills</a>
+        <a href="#experience" class="hover:text-e94560 transition duration-300 text-2xl">/experience</a>
+        <a href="#education" class="hover:text-e94560 transition duration-300 text-2xl">/education</a>
+        <a href="#certifications" class="hover:text-e94560 transition duration-300 text-2xl">/achievements</a>
+        <a href="#projects" class="hover:text-e94560 transition duration-300 text-2xl">/projects</a>
+        <a href="#contact" class="hover:text-e94560 transition duration-300 text-2xl">/contact</a>
+    </nav>
+
 
     <!-- Hero Section -->
     <main class="container mx-auto px-4 pt-32">
@@ -332,6 +387,58 @@
             </div>
         </section>
 
+        <!-- Education Section -->
+        <section id="education" class="py-20 fade-in-section">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Education /&gt;</span></h2>
+            <div class="space-y-8">
+                <div class="glass-card p-8">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-press-start text-xl text-e94560">Bachelor of Technology, Information Technology</h3>
+                            <p class="text-md mt-1">Amal Jyothi College of Engineering Autonomous</p>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400">2019 - 2023</p>
+                    </div>
+                     <p class="mt-2 text-gray-300">Grade: 8.65</p>
+                </div>
+                 <div class="glass-card p-8">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-press-start text-xl text-e94560">Science with Computer Science and Maths</h3>
+                            <p class="text-md mt-1">Abu Dhabi Indian School, Branch 1, Al Wathba</p>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400">2018 - 2019</p>
+                    </div>
+                     <p class="mt-2 text-gray-300">Grade: 79.2%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-20 fade-in-section">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Achievements /&gt;</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-lg text-e94560">Certified Agile Scrum Master (CSM)</h3>
+                    <p class="mt-2 text-gray-400">Emirates AI Research & Innovation Hub</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <a href="https://www.hrduniversity.org/certificates/4jqihic1vn" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
+                </div>
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-lg text-e94560">Unity C# Scripting</h3>
+                    <p class="mt-2 text-gray-400">Udemy</p>
+                     <div class="mt-4 flex-grow"></div>
+                    <a href="https://www.udemy.com/certificate/UC-461865ea-2edc-45fb-bcee-38ef8e308460/" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
+                </div>
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-lg text-e94560">Young Innovators Programme</h3>
+                    <p class="mt-2 text-gray-400">Kerala Development and Innovation Strategic Council</p>
+                     <div class="mt-4 flex-grow"></div>
+                    <a href="https://www.linkedin.com/in/angelamariagigi/details/certifications/1737802947817/single-media-viewer/?type=DOCUMENT&profileId=ACoAADc58M4BrbvmZNpIBwm-aiTz1ndNYvcyTTE" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Projects Section -->
         <section id="projects" class="py-20 fade-in-section">
             <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Side Quests /&gt;</span></h2>
@@ -343,7 +450,6 @@
                     <div class="mt-4 flex-grow"></div>
                     <div class="flex flex-wrap gap-2 mt-4">
                         <span class="bg-blue-800 text-blue-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Vue.js</span>
-                        <span class="bg-yellow-800 text-yellow-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
                         <span class="bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Real-time Video</span>
                     </div>
                 </div>
@@ -379,10 +485,14 @@
                 <p class="mt-4 text-2xl font-bold text-e94560 hover:text-white transition duration-300">
                     <a href="mailto:angelamariagigi@gmail.com">angelamariagigi@gmail.com</a>
                 </p>
-                <div class="mt-6 flex justify-center space-x-6">
-                     <a href="tel:+971582382152" class="text-gray-300 hover:text-e94560 transition duration-300 text-sm">Phone: +971 58 238 2152</a>
+                <div class="mt-6 flex justify-center items-center space-x-6">
+                     <a href="tel:+971582382152" class="text-gray-300 hover:text-e94560 transition duration-300 text-sm">Phone</a>
                      <span class="text-gray-500">|</span>
                      <p class="text-gray-300 text-sm">Abu Dhabi, UAE</p>
+                     <span class="text-gray-500">|</span>
+                     <a href="https://www.linkedin.com/in/angelamariagigi" target="_blank" class="text-gray-300 hover:text-e94560 transition duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                     </a>
                 </div>
                  <div class="mt-8">
                      <a href="mailto:angelamariagigi@gmail.com" class="pixel-btn">Send a Message</a>
@@ -392,7 +502,7 @@
     </main>
 
     <footer class="text-center py-8 text-gray-500">
-        <p>&copy; 2025 Angela Maria Gigi. Designed with <span class="text-e94560">&lt;3</span></p>
+        <p>&copy; 2024 Angela Maria Gigi. Designed with <span class="text-e94560">&lt;3</span></p>
     </footer>
     
     <!-- Hidden Game Modal -->
@@ -446,6 +556,27 @@
         sections.forEach(section => {
             observer.observe(section);
         });
+
+        // --- Mobile Sidebar Logic ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('overlay');
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+
+        function openSidebar() {
+            mobileMenu.classList.add('open');
+            overlay.classList.add('active');
+        }
+
+        function closeSidebar() {
+            mobileMenu.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        hamburgerBtn.addEventListener('click', openSidebar);
+        overlay.addEventListener('click', closeSidebar);
+        mobileNavLinks.forEach(link => link.addEventListener('click', closeSidebar));
+
 
         // --- Hidden Snake Game Logic ---
         const heroCharacter = document.getElementById('hero-character');
@@ -633,7 +764,4 @@
     </script>
 </body>
 </html>
-
-
-
 
