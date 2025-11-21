@@ -47,6 +47,7 @@
             border: 2px solid #1a1a2e;
             box-shadow: 4px 4px 0px #0f3460;
             transition: all 0.2s ease-in-out;
+            cursor: pointer;
         }
 
         .pixel-btn:hover {
@@ -188,6 +189,8 @@
             background-color: #1a1a2e;
             border: 2px solid #e0e0e0;
             max-width: 100%;
+            display: block;
+            margin: 0 auto;
         }
 
         /* D-Pad controls for mobile */
@@ -208,6 +211,10 @@
             border: 2px solid #1a1a2e;
             box-shadow: 2px 2px 0px #0f3460;
             user-select: none; /* Prevent text selection on tap */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
          .d-pad-btn:active {
             transform: translate(2px, 2px);
@@ -234,9 +241,9 @@
 
 
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 p-4 glass-card mx-4 mt-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="font-press-start text-lg text-white">ANGELA M. GIGI</a>
+    <header class="fixed top-0 left-0 right-0 z-50 p-4 mx-4 mt-4">
+        <div class="glass-card px-6 py-3 container mx-auto flex justify-between items-center">
+            <a href="#" class="font-press-start text-lg text-white">ANGELA MARIA GIGI</a>
             <nav class="hidden md:flex space-x-6">
                 <a href="#about" class="hover:text-e94560 transition duration-300">/about</a>
                 <a href="#skills" class="hover:text-e94560 transition duration-300">/skills</a>
@@ -265,9 +272,9 @@
 
 
     <!-- Hero Section -->
-    <main class="container mx-auto px-4 pt-32">
+    <main class="container mx-auto px-4 pt-32 pb-10">
         <section class="min-h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left">
-            <div class="md:w-1/2 relative">
+            <div class="md:w-1/2 relative mb-10 md:mb-0">
                 <div id="hero-character" class="w-64 h-64 md:w-80 md:h-80 mx-auto floating cursor-pointer" title="Click me!">
                     <svg viewBox="0 0 100 100" class="w-full h-full">
                         <defs>
@@ -284,8 +291,8 @@
                 </div>
             </div>
             <div class="md:w-1/2 mt-8 md:mt-0">
-                <h1 class="font-press-start text-3xl md:text-4xl lg:text-5xl text-white">
-                    <span class="typing-effect inline-block border-r-4 border-e94560 blink">Angela Maria Gigi</span>
+                <h1 class="font-press-start text-2xl md:text-3xl lg:text-5xl text-white mb-6">
+                    <span class="typing-effect inline-block border-r-4 border-e94560 blink pb-2">Angela Maria Gigi</span>
                 </h1>
                 <p class="text-xl md:text-2xl mt-4 text-gray-300">A <span class="text-e94560">Game Developer</span> crafting immersive digital worlds.</p>
                 <div class="mt-8">
@@ -295,7 +302,7 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20 fade-in-section">
+        <section id="about" class="py-20 fade-in-section scroll-mt-20">
             <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;About Me /&gt;</span></h2>
             <div class="glass-card p-8 flex flex-col md:flex-row items-center gap-8">
                  <div class="w-32 h-32 flex-shrink-0">
@@ -311,58 +318,58 @@
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="py-20 fade-in-section">
+        <section id="skills" class="py-20 fade-in-section scroll-mt-20">
             <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Power-Ups /&gt;</span></h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Technical Skills -->
                 <div class="glass-card p-6 skill-item">
-                    <h3 class="font-press-start text-lg mb-4 text-e94560">Unity</h3>
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Unity</h3>
                     <p>Core gameplay, UI/UX, monetization, multiplayer systems.</p>
                 </div>
                 <div class="glass-card p-6 skill-item">
-                    <h3 class="font-press-start text-lg mb-4 text-e94560">C#</h3>
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">C#</h3>
                     <p>Primary language for Unity development and game logic.</p>
                 </div>
                  <div class="glass-card p-6 skill-item">
-                    <h3 class="font-press-start text-lg mb-4 text-e94560">Python</h3>
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Python</h3>
                     <p>Data processing, backend tasks, and ML agents.</p>
                 </div>
                 <div class="glass-card p-6 skill-item">
-                    <h3 class="font-press-start text-lg mb-4 text-e94560">C/C++</h3>
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">C/C++</h3>
                     <p>Fundamental programming and performance optimization.</p>
                 </div>
                 <div class="glass-card p-6 skill-item">
-                    <h3 class="font-press-start text-lg mb-4 text-e94560">Vue.js</h3>
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Vue.js</h3>
                     <p>Frontend web development for tools and web projects.</p>
                 </div>
                 <div class="glass-card p-6 skill-item">
-                    <h3 class="font-press-start text-lg mb-4 text-e94560">JS</h3>
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">JS</h3>
                     <p>Web interactivity and frontend logic.</p>
                 </div>
                 <div class="glass-card p-6 skill-item">
-                    <h3 class="font-press-start text-lg mb-4 text-e94560">Node.js</h3>
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Node.js</h3>
                     <p>Backend services and API development.</p>
                 </div>
                 <div class="glass-card p-6 skill-item">
-                    <h3 class="font-press-start text-lg mb-4 text-e94560">Firebase</h3>
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Firebase</h3>
                     <p>Auth, cloud save, analytics, real-time DB.</p>
                 </div>
             </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="py-20 fade-in-section">
+        <section id="experience" class="py-20 fade-in-section scroll-mt-20">
             <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Level Cleared /&gt;</span></h2>
             <div class="space-y-8">
                 <div class="glass-card p-8">
-                    <div class="flex justify-between items-start">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
                         <div>
-                            <h3 class="font-press-start text-xl text-e94560">Software Engineer</h3>
-                            <p class="text-md mt-1">ArBa Development Studio Pvt Ltd.</p>
+                            <h3 class="font-press-start text-lg md:text-xl text-e94560">Software Engineer</h3>
+                            <p class="text-md mt-1 font-bold">ArBa Development Studio Pvt Ltd.</p>
                         </div>
-                        <p class="text-sm font-bold text-gray-400">July 2023 - Present</p>
+                        <p class="text-sm font-bold text-gray-400 mt-2 md:mt-0">July 2023 - Present</p>
                     </div>
-                    <ul class="mt-4 list-disc list-inside space-y-2 text-gray-300">
+                    <ul class="list-disc list-inside space-y-2 text-gray-300">
                         <li>Developed core gameplay systems, UI/UX, and player interactions.</li>
                         <li>Built PvP multiplayer, matchmaking, and level sharing features.</li>
                         <li>Integrated Unity Ads, AdMob, and IronSource for monetization.</li>
@@ -372,14 +379,14 @@
                     </ul>
                 </div>
                  <div class="glass-card p-8">
-                    <div class="flex justify-between items-start">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
                         <div>
-                            <h3 class="font-press-start text-xl text-e94560">Frontend Web Developer (Intern)</h3>
-                            <p class="text-md mt-1">Leopard Tech Labs</p>
+                            <h3 class="font-press-start text-lg md:text-xl text-e94560">Frontend Web Developer (Intern)</h3>
+                            <p class="text-md mt-1 font-bold">Leopard Tech Labs</p>
                         </div>
-                        <p class="text-sm font-bold text-gray-400">Feb 2022 - Jun 2022</p>
+                        <p class="text-sm font-bold text-gray-400 mt-2 md:mt-0">Feb 2022 - Jun 2022</p>
                     </div>
-                    <ul class="mt-4 list-disc list-inside space-y-2 text-gray-300">
+                    <ul class="list-disc list-inside space-y-2 text-gray-300">
                         <li>Developed an admin panel using Vue.js for the frontend.</li>
                         <li>Worked with Node.js for backend functionalities.</li>
                     </ul>
@@ -388,105 +395,162 @@
         </section>
 
         <!-- Education Section -->
-        <section id="education" class="py-20 fade-in-section">
+        <section id="education" class="py-20 fade-in-section scroll-mt-20">
             <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Education /&gt;</span></h2>
             <div class="space-y-8">
                 <div class="glass-card p-8">
-                    <div class="flex justify-between items-start">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-2">
                         <div>
-                            <h3 class="font-press-start text-xl text-e94560">Bachelor of Technology, Information Technology</h3>
+                            <h3 class="font-press-start text-lg md:text-xl text-e94560">Bachelor of Technology, Information Technology</h3>
                             <p class="text-md mt-1">Amal Jyothi College of Engineering Autonomous</p>
                         </div>
-                        <p class="text-sm font-bold text-gray-400">2019 - 2023</p>
+                        <p class="text-sm font-bold text-gray-400 mt-2 md:mt-0">2019 - 2023</p>
                     </div>
-                     <p class="mt-2 text-gray-300">Grade: 8.65</p>
+                      <p class="mt-2 text-gray-300">Grade: 8.65</p>
                 </div>
                  <div class="glass-card p-8">
-                    <div class="flex justify-between items-start">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-2">
                         <div>
-                            <h3 class="font-press-start text-xl text-e94560">Science with Computer Science and Maths</h3>
+                            <h3 class="font-press-start text-lg md:text-xl text-e94560">Science with Computer Science and Maths</h3>
                             <p class="text-md mt-1">Abu Dhabi Indian School, Branch 1, Al Wathba</p>
                         </div>
-                        <p class="text-sm font-bold text-gray-400">2018 - 2019</p>
+                        <p class="text-sm font-bold text-gray-400 mt-2 md:mt-0">2018 - 2019</p>
                     </div>
-                     <p class="mt-2 text-gray-300">Grade: 79.2%</p>
+                      <p class="mt-2 text-gray-300">Grade: 79.2%</p>
                 </div>
             </div>
         </section>
 
         <!-- Certifications Section -->
-        <section id="certifications" class="py-20 fade-in-section">
+        <section id="certifications" class="py-20 fade-in-section scroll-mt-20">
             <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Achievements /&gt;</span></h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="glass-card p-6 flex flex-col">
-                    <h3 class="font-press-start text-lg text-e94560">Certified Agile Scrum Master (CSM)</h3>
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Scrum Master Certification</h3>
+                    <p class="mt-2 text-gray-400">The Knowledge Academy (TKA) • 2025</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <a href="https://myportal.theknowledgeacademy.com/certificates/b5ac903e-985b-11f0-a481-005056bb7ecb" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
+                </div>
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Certified Agile Scrum Master (CSM)</h3>
                     <p class="mt-2 text-gray-400">Emirates AI Research & Innovation Hub</p>
                     <div class="mt-4 flex-grow"></div>
                     <a href="https://www.hrduniversity.org/certificates/4jqihic1vn" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
                 </div>
                 <div class="glass-card p-6 flex flex-col">
-                    <h3 class="font-press-start text-lg text-e94560">Unity C# Scripting</h3>
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Unity C# Scripting</h3>
                     <p class="mt-2 text-gray-400">Udemy</p>
-                     <div class="mt-4 flex-grow"></div>
+                      <div class="mt-4 flex-grow"></div>
                     <a href="https://www.udemy.com/certificate/UC-461865ea-2edc-45fb-bcee-38ef8e308460/" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
                 </div>
                 <div class="glass-card p-6 flex flex-col">
-                    <h3 class="font-press-start text-lg text-e94560">Young Innovators Programme</h3>
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Young Innovators Programme</h3>
                     <p class="mt-2 text-gray-400">Kerala Development and Innovation Strategic Council</p>
-                     <div class="mt-4 flex-grow"></div>
+                      <div class="mt-4 flex-grow"></div>
                     <a href="https://www.linkedin.com/in/angelamariagigi/details/certifications/1737802947817/single-media-viewer/?type=DOCUMENT&profileId=ACoAADc58M4BrbvmZNpIBwm-aiTz1ndNYvcyTTE" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-20 fade-in-section">
+        <section id="projects" class="py-20 fade-in-section scroll-mt-20">
             <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Side Quests /&gt;</span></h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1 -->
+                <!-- Project Card 1: Rush Set Go -->
                 <div class="glass-card p-6 flex flex-col">
-                    <h3 class="font-press-start text-lg text-e94560">Air Painting</h3>
-                    <p class="mt-2 text-gray-400">A web application that allows users to paint on a digital canvas using hand gestures captured via webcam.</p>
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Rush Set Go</h3>
+                    <p class="mt-2 text-gray-400">A 3D survival game for Windows where players dodge obstacles, collect rewards, and survive increasingly difficult runs.</p>
                     <div class="mt-4 flex-grow"></div>
                     <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="bg-blue-800 text-blue-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Vue.js</span>
-                        <span class="bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Real-time Video</span>
+                        <span class="bg-purple-800 text-purple-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Unity 3D</span>
+                        <span class="bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Windows</span>
+                        <a href="https://github.com/pappykunj/RushSetGo" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
                     </div>
                 </div>
-                <!-- Project Card 2 -->
+                
+                <!-- Project Card 2: AI Kills Zombies -->
                 <div class="glass-card p-6 flex flex-col">
-                    <h3 class="font-press-start text-lg text-e94560">Speed Limiter</h3>
-                    <p class="mt-2 text-gray-400">A backend service that integrates with a map REST API to display road speed limits and includes a review module.</p>
-                     <div class="mt-4 flex-grow"></div>
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">AI Kills Zombies</h3>
+                    <p class="mt-2 text-gray-400">An AI/ML agent trained using Unity and Python to target specific enemies. The system rewards the agent based on shooting accuracy, kills, and treasure collection.</p>
+                    <div class="mt-4 flex-grow"></div>
                     <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="bg-green-800 text-green-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Node.js</span>
-                        <span class="bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">REST API</span>
+                        <span class="bg-purple-800 text-purple-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Unity ML</span>
+                        <span class="bg-yellow-800 text-yellow-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
+                        <a href="https://github.com/pappykunj/AI-Kills-Zombies" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
                     </div>
                 </div>
-                <!-- Project Card 3 -->
+
+                <!-- Project Card 3: Break the Q -->
                 <div class="glass-card p-6 flex flex-col">
-                    <h3 class="font-press-start text-lg text-e94560">Break the Q</h3>
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Break the Q</h3>
                     <p class="mt-2 text-gray-400">A vaccine alert website and Telegram bot created during the pandemic to notify users of available slots in Kerala.</p>
-                     <div class="mt-4 flex-grow"></div>
+                      <div class="mt-4 flex-grow"></div>
                     <div class="flex flex-wrap gap-2 mt-4">
                         <span class="bg-yellow-800 text-yellow-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Python</span>
                         <span class="bg-blue-800 text-blue-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Telegram Bot</span>
                          <a href="https://vaccine-alert.github.io/" target="_blank" class="text-e94560 hover:underline">Live Link</a>
                     </div>
                 </div>
+
+                <!-- Project Card 4: Air Painting -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Air Painting</h3>
+                    <p class="mt-2 text-gray-400">A web application that allows users to paint on a digital canvas using hand gestures captured via webcam.</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="bg-blue-800 text-blue-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Vue.js</span>
+                        <span class="bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Real-time Video</span>
+                        <a href="https://github.com/pappykunj/AirPainting_ai" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 5: PRS System -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">PRS System</h3>
+                    <p class="mt-2 text-gray-400">A Permanent Record Storage system built using C++ file operations and Object-Oriented Programming principles.</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="bg-blue-800 text-blue-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">C++</span>
+                        <span class="bg-purple-800 text-purple-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">OOP</span>
+                        <a href="https://github.com/pappykunj/PRS" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 6: Movie Ticket Booking -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Movie Ticket Booking</h3>
+                    <p class="mt-2 text-gray-400">A public movie ticket booking program built using procedural programming and linked lists for efficient data management.</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">C</span>
+                        <span class="bg-blue-900 text-blue-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Linked List</span>
+                        <a href="https://github.com/pappykunj/Movie-Ticket-Booking/tree/main" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 7: Speed Limiter -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Speed Limiter</h3>
+                    <p class="mt-2 text-gray-400">A backend service that integrates with a map REST API to display road speed limits and includes a review module.</p>
+                      <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="bg-green-800 text-green-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">Node.js</span>
+                        <span class="bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-0.5 rounded-full">REST API</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20 fade-in-section">
+        <section id="contact" class="py-20 fade-in-section scroll-mt-20">
             <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Contact /&gt;</span></h2>
             <div class="glass-card p-8 max-w-2xl mx-auto text-center">
                 <p class="text-xl">Interested in collaborating or have a question? Let's connect!</p>
-                <p class="mt-4 text-2xl font-bold text-e94560 hover:text-white transition duration-300">
+                <p class="mt-4 text-xl md:text-2xl font-bold text-e94560 hover:text-white transition duration-300 break-all">
                     <a href="mailto:angelamariagigi@gmail.com">angelamariagigi@gmail.com</a>
                 </p>
                 <div class="mt-6 flex justify-center items-center space-x-6">
-                     <a href="tel:+971582382152" class="text-gray-300 hover:text-e94560 transition duration-300 text-sm">Phone</a>
+                     <a href="tel:+971582382152" class="text-gray-300 hover:text-e94560 transition duration-300 text-sm">+971 58 238 2152</a>
                      <span class="text-gray-500">|</span>
                      <p class="text-gray-300 text-sm">Abu Dhabi, UAE</p>
                      <span class="text-gray-500">|</span>
@@ -508,10 +572,10 @@
     <!-- Hidden Game Modal -->
     <div id="game-modal">
         <div id="game-container">
-            <h2 class="font-press-start text-2xl mb-4">Secret Snake Game!</h2>
+            <h2 class="font-press-start text-xl md:text-2xl mb-4 text-white">Secret Snake Game!</h2>
             <canvas id="snake-game"></canvas>
             <div class="mt-4 flex justify-between items-center">
-                 <p id="score-display" class="font-press-start text-lg">Score: 0</p>
+                 <p id="score-display" class="font-press-start text-lg text-white">Score: 0</p>
                  <div>
                     <button id="start-game-btn" class="pixel-btn text-sm py-2 px-4">Start</button>
                     <button id="close-game-btn" class="pixel-btn text-sm py-2 px-4 ml-2">Close</button>
@@ -596,7 +660,10 @@
             const style = window.getComputedStyle(container);
             const paddingX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
             const containerWidth = container.clientWidth - paddingX;
-            const newSize = Math.floor(containerWidth / gridSize) * gridSize;
+            // Adjust size for mobile vs desktop
+            const maxSize = Math.min(containerWidth, 400);
+            const newSize = Math.floor(maxSize / gridSize) * gridSize;
+            
             canvas.width = newSize;
             canvas.height = newSize;
         }
@@ -636,10 +703,10 @@
                 ctx.fillStyle = 'rgba(26, 26, 46, 0.75)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = 'white';
-                ctx.font = "30px 'Press Start 2P'";
+                ctx.font = "20px 'Press Start 2P'";
                 ctx.textAlign = 'center';
                 ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 20);
-                ctx.font = "20px 'Press Start 2P'";
+                ctx.font = "14px 'Press Start 2P'";
                 ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
             }
         }
@@ -655,11 +722,13 @@
             if (direction === 'up') head.y--;
             if (direction === 'down') head.y++;
 
+            // Wall collision logic
             if (head.x * gridSize >= canvas.width || head.x < 0 || head.y * gridSize >= canvas.height || head.y < 0) {
                 endGame();
                 return;
             }
 
+            // Self collision logic
             for (let i = 1; i < snake.length; i++) {
                 if (head.x === snake[i].x && head.y === snake[i].y) {
                     endGame();
@@ -723,8 +792,12 @@
             if (keyPressed === 'arrowdown' || keyPressed === 's') newDirection = 'down';
             if (keyPressed === 'arrowleft' || keyPressed === 'a') newDirection = 'left';
             if (keyPressed === 'arrowright' || keyPressed === 'd') newDirection = 'right';
-            
+             
             if(newDirection) {
+                // Prevent scrolling with arrow keys if game modal is open
+                if(gameModal.style.display === 'flex') {
+                    event.preventDefault();
+                }
                 setDirection(newDirection);
             }
         }
@@ -732,6 +805,8 @@
         heroCharacter.addEventListener('click', () => {
             gameModal.style.display = 'flex';
             resizeCanvas();
+            // Slight delay to ensure canvas is rendered before drawing
+            setTimeout(draw, 50);
         });
 
         closeGameBtn.addEventListener('click', () => {
@@ -741,7 +816,12 @@
             startGameBtn.textContent = 'Start';
         });
 
-        startGameBtn.addEventListener('click', initGame);
+        startGameBtn.addEventListener('click', (e) => {
+             // Prevent event bubbling if necessary, though not critical here
+             e.stopPropagation();
+             initGame();
+        });
+        
         window.addEventListener('keydown', handleKeyDown);
 
         // Event listener for on-screen controls
@@ -764,5 +844,3 @@
     </script>
 </body>
 </html>
-
-
