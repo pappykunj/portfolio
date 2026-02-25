@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angela Maria Gigi - Game Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the game theme */
+        body {
+            background-color: #1a1a2e;
+            color: #e0e0e0;
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            overflow-x: hidden;
+        }
+
+        .font-press-start {
+            font-family: 'Press Start 2P', cursive;
+        }
+        
+        /* Glassmorphism card effect */
+        .glass-card {
+            background: rgba(26, 26, 46, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        /* Custom button styling */
+        .pixel-btn {
+            position: relative;
+            display: inline-block;
+            padding: 12px 24px;
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            overflow: hidden;
+            background-color: #e94560;
+            border-radius: 8px;
+            border: 2px solid #1a1a2e;
+            box-shadow: 4px 4px 0px #0f3460;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .pixel-btn:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #0f3460;
+            background-color: #ff5e78;
+        }
+        
+        .pixel-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #0f3460;
+        }
+
+        /* Typing animation */
+        .typing-effect {
+            width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 2s steps(30, end) forwards;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Blinking cursor */
+        .blink {
+            animation: blink-caret .75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #e94560; }
+        }
+
+        /* Floating animation for hero character */
+        @keyframes float {
+            0% { transform: translatey(0px); }
+            50% { transform: translatey(-10px); }
+            100% { transform: translatey(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Section Header Styling */
+        .section-header {
+             display: inline-block;
+             background-color: #0f3460;
+             color: #e94560;
+             padding: 8px 16px;
+             border-radius: 8px;
+             border: 2px solid #16213e;
+             text-shadow: 2px 2px #000;
+        }
+
+        /* Skill Item Styling */
+        .skill-item {
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .skill-item:hover {
+            transform: scale(1.1);
+            background-color: #16213e;
+        }
+
+        /* Scroll-triggered animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Sidebar Styles */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 75%;
+            height: 100%;
+            background-color: #0f3460;
+            z-index: 1001;
+            transition: right 0.3s ease-in-out;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        #mobile-menu.open {
+            right: 0;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        #overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+
+        /* Hidden Game Styles */
+        #game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002; /* Higher than sidebar overlay */
+        }
+        #game-container {
+            background-color: #0f3460;
+            padding: 1rem;
+            border-radius: 16px;
+            border: 4px solid #e94560;
+            text-align: center;
+            width: 95vw;
+            max-width: 480px;
+        }
+        #snake-game {
+            background-color: #1a1a2e;
+            border: 2px solid #e0e0e0;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* D-Pad controls for mobile */
+        .d-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0.5rem;
+            width: 150px;
+            height: 150px;
+            margin: 1rem auto 0;
+        }
+        .d-pad-btn {
+            background-color: #e94560;
+            color: white;
+            font-size: 24px;
+            border-radius: 8px;
+            border: 2px solid #1a1a2e;
+            box-shadow: 2px 2px 0px #0f3460;
+            user-select: none; /* Prevent text selection on tap */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+         .d-pad-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px #0f3460;
+        }
+        #d-pad-up { grid-area: 1 / 2 / 2 / 3; }
+        #d-pad-left { grid-area: 2 / 1 / 3 / 2; }
+        #d-pad-right { grid-area: 2 / 3 / 3 / 4; }
+        #d-pad-down { grid-area: 3 / 2 / 4 / 3; }
+
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Background Decoration Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-600 rounded-full opacity-20 filter blur-2xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-32 h-32 bg-pink-600 rounded-full opacity-20 filter blur-2xl animate-pulse delay-1000"></div>
+        <div class="absolute top-10 right-20 w-16 h-16 bg-blue-500 rounded-full opacity-10 filter blur-xl animate-pulse delay-2000"></div>
+        <div class="absolute bottom-5 left-10 w-24 h-24 bg-teal-500 rounded-full opacity-10 filter blur-xl animate-pulse delay-3000"></div>
+    </div>
+    
+    <div id="overlay"></div>
+
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-4 mx-4 mt-4">
+        <div class="glass-card px-6 py-3 container mx-auto flex justify-between items-center">
+            <a href="#" class="font-press-start text-lg text-white">ANGELA MARIA GIGI</a>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#about" class="hover:text-e94560 transition duration-300">/about</a>
+                <a href="#skills" class="hover:text-e94560 transition duration-300">/skills</a>
+                <a href="#experience" class="hover:text-e94560 transition duration-300">/experience</a>
+                <a href="#education" class="hover:text-e94560 transition duration-300">/education</a>
+                <a href="#certifications" class="hover:text-e94560 transition duration-300">/achievements</a>
+                <a href="#projects" class="hover:text-e94560 transition duration-300">/projects</a>
+                <a href="#contact" class="hover:text-e94560 transition duration-300">/contact</a>
+            </nav>
+            <button id="hamburger-btn" class="md:hidden text-white">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Sidebar -->
+    <nav id="mobile-menu">
+        <a href="#about" class="hover:text-e94560 transition duration-300 text-2xl">/about</a>
+        <a href="#skills" class="hover:text-e94560 transition duration-300 text-2xl">/skills</a>
+        <a href="#experience" class="hover:text-e94560 transition duration-300 text-2xl">/experience</a>
+        <a href="#education" class="hover:text-e94560 transition duration-300 text-2xl">/education</a>
+        <a href="#certifications" class="hover:text-e94560 transition duration-300 text-2xl">/achievements</a>
+        <a href="#projects" class="hover:text-e94560 transition duration-300 text-2xl">/projects</a>
+        <a href="#contact" class="hover:text-e94560 transition duration-300 text-2xl">/contact</a>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <main class="container mx-auto px-4 pt-32 pb-10">
+        <section class="min-h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left">
+            <div class="md:w-1/2 relative mb-10 md:mb-0">
+                <div id="hero-character" class="w-64 h-64 md:w-80 md:h-80 mx-auto floating cursor-pointer" title="Click me!">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#ff5e78;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#e94560;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 0 L65 25 L90 25 L75 45 L85 70 L50 60 L15 70 L25 45 L10 25 L35 25 Z" fill="url(#grad1)"/>
+                        <circle cx="50" cy="50" r="20" fill="#1a1a2e"/>
+                        <circle cx="45" cy="48" r="3" fill="white"/>
+                        <circle cx="55" cy="48" r="3" fill="white"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-8 md:mt-0">
+                <h1 class="font-press-start text-2xl md:text-3xl lg:text-5xl text-white mb-6">
+                    <span class="typing-effect inline-block border-r-4 border-e94560 blink pb-2">Angela Maria Gigi</span>
+                </h1>
+                <p class="text-xl md:text-2xl mt-4 text-gray-300">A <span class="text-e94560">Game Developer</span> crafting immersive digital worlds.</p>
+                <div class="mt-8">
+                    <a href="#projects" class="pixel-btn">View My Work</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 fade-in-section scroll-mt-20">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;About Me /&gt;</span></h2>
+            <div class="glass-card p-8 flex flex-col md:flex-row items-center gap-8">
+                 <div class="w-32 h-32 flex-shrink-0">
+                     <svg viewBox="0 0 100 100" class="w-full h-full">
+                         <rect x="10" y="10" width="80" height="80" rx="15" fill="#0f3460" />
+                         <text x="50" y="60" font-family="'Press Start 2P', cursive" font-size="30" fill="white" text-anchor="middle">AG</text>
+                     </svg>
+                 </div>
+                 <div>
+                     <p class="text-lg leading-relaxed">I'm a motivated game developer with solid experience across mobile and PC platforms. I'm passionate about building engaging gameplay systems and interactive experiences. With a foundation in Information Technology and hands-on experience in the industry, I'm eager to learn, expand my opportunities, and contribute to innovative game development projects.</p>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 fade-in-section scroll-mt-20">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Power-Ups /&gt;</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Technical Skills -->
+                <div class="glass-card p-6 skill-item">
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Unity</h3>
+                    <p>Core gameplay, UI/UX, monetization, multiplayer systems.</p>
+                </div>
+                <div class="glass-card p-6 skill-item">
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">C#</h3>
+                    <p>Primary language for Unity development and game logic.</p>
+                </div>
+                 <div class="glass-card p-6 skill-item">
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Python</h3>
+                    <p>Data processing, backend tasks, and ML agents.</p>
+                </div>
+                <div class="glass-card p-6 skill-item">
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">C/C++</h3>
+                    <p>Fundamental programming and performance optimization.</p>
+                </div>
+                <div class="glass-card p-6 skill-item">
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Vue.js</h3>
+                    <p>Frontend web development for tools and web projects.</p>
+                </div>
+                <div class="glass-card p-6 skill-item">
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">JS</h3>
+                    <p>Web interactivity and frontend logic.</p>
+                </div>
+                <div class="glass-card p-6 skill-item">
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Node.js</h3>
+                    <p>Backend services and API development.</p>
+                </div>
+                <div class="glass-card p-6 skill-item">
+                    <h3 class="font-press-start text-sm md:text-lg mb-4 text-e94560">Firebase</h3>
+                    <p>Auth, cloud save, analytics, real-time DB.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 fade-in-section scroll-mt-20">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Level Cleared /&gt;</span></h2>
+            <div class="space-y-8">
+                <div class="glass-card p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-press-start text-lg md:text-xl text-e94560">Software Engineer</h3>
+                            <p class="text-md mt-1 font-bold">ArBa Development Studio Pvt Ltd.</p>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400 mt-2 md:mt-0">July 2023 - Present</p>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300">
+                        <li>Developed core gameplay systems, UI/UX, and player interactions.</li>
+                        <li>Built PvP multiplayer, matchmaking, and level sharing features.</li>
+                        <li>Integrated Unity Ads, AdMob, and IronSource for monetization.</li>
+                        <li>Implemented Firebase services for backend and analytics.</li>
+                        <li>Optimized performance using lazy loading and memory management.</li>
+                        <li>Applied Unity ML-Agents for AI-driven simulations and testing.</li>
+                    </ul>
+                </div>
+                 <div class="glass-card p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-press-start text-lg md:text-xl text-e94560">Frontend Web Developer (Intern)</h3>
+                            <p class="text-md mt-1 font-bold">Leopard Tech Labs</p>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400 mt-2 md:mt-0">Feb 2022 - Jun 2022</p>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300">
+                        <li>Developed an admin panel using Vue.js for the frontend.</li>
+                        <li>Worked with Node.js for backend functionalities.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 fade-in-section scroll-mt-20">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Education /&gt;</span></h2>
+            <div class="space-y-8">
+                <div class="glass-card p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-press-start text-lg md:text-xl text-e94560">Bachelor of Technology, Information Technology</h3>
+                            <p class="text-md mt-1">Amal Jyothi College of Engineering Autonomous</p>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400 mt-2 md:mt-0">2019 - 2023</p>
+                    </div>
+                      <p class="mt-2 text-gray-300">Grade: 8.65</p>
+                </div>
+                 <div class="glass-card p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-press-start text-lg md:text-xl text-e94560">Science with Computer Science and Maths</h3>
+                            <p class="text-md mt-1">Abu Dhabi Indian School, Branch 1, Al Wathba</p>
+                        </div>
+                        <p class="text-sm font-bold text-gray-400 mt-2 md:mt-0">2018 - 2019</p>
+                    </div>
+                      <p class="mt-2 text-gray-300">Grade: 79.2%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-20 fade-in-section scroll-mt-20">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Achievements /&gt;</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Scrum Master Certification</h3>
+                    <p class="mt-2 text-gray-400">The Knowledge Academy (TKA) • 2025</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <a href="https://myportal.theknowledgeacademy.com/certificates/b5ac903e-985b-11f0-a481-005056bb7ecb" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
+                </div>
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Certified Agile Scrum Master (CSM)</h3>
+                    <p class="mt-2 text-gray-400">Emirates AI Research & Innovation Hub</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <a href="https://www.hrduniversity.org/certificates/4jqihic1vn" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
+                </div>
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Unity C# Scripting</h3>
+                    <p class="mt-2 text-gray-400">Udemy</p>
+                      <div class="mt-4 flex-grow"></div>
+                    <a href="https://www.udemy.com/certificate/UC-461865ea-2edc-45fb-bcee-38ef8e308460/" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
+                </div>
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Young Innovators Programme</h3>
+                    <p class="mt-2 text-gray-400">Kerala Development and Innovation Strategic Council</p>
+                      <div class="mt-4 flex-grow"></div>
+                    <a href="https://www.linkedin.com/in/angelamariagigi/details/certifications/1737802947817/single-media-viewer/?type=DOCUMENT&profileId=ACoAADc58M4BrbvmZNpIBwm-aiTz1ndNYvcyTTE" target="_blank" class="text-e94560 hover:underline mt-2 inline-block">View Credential</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 fade-in-section scroll-mt-20">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Side Quests /&gt;</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1: Rush Set Go -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Rush Set Go</h3>
+                    <p class="mt-2 text-gray-400">A 3D survival game for Windows where players dodge obstacles, collect rewards, and survive increasingly difficult runs.</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="inline-flex items-center bg-purple-800 text-purple-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Unity 3D</span>
+                        <span class="inline-flex items-center bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Windows</span>
+                        <a href="https://github.com/pappykunj/RushSetGo" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
+                    </div>
+                </div>
+                
+                <!-- Project Card 2: AI Kills Zombies -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">AI Kills Zombies</h3>
+                    <p class="mt-2 text-gray-400">An AI/ML agent trained using Unity and Python to target specific enemies. The system rewards the agent based on shooting accuracy, kills, and treasure collection.</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="inline-flex items-center bg-purple-800 text-purple-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Unity ML</span>
+                        <span class="inline-flex items-center bg-yellow-800 text-yellow-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Python</span>
+                        <a href="https://github.com/pappykunj/AI-Kills-Zombies" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: Break the Q -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Break the Q</h3>
+                    <p class="mt-2 text-gray-400">A vaccine alert website and Telegram bot created during the pandemic to notify users of available slots in Kerala.</p>
+                      <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="inline-flex items-center bg-yellow-800 text-yellow-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Python</span>
+                        <span class="inline-flex items-center bg-blue-800 text-blue-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Telegram Bot</span>
+                         <a href="https://vaccine-alert.github.io/" target="_blank" class="text-e94560 hover:underline">Live Link</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 4: Air Painting -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Air Painting</h3>
+                    <p class="mt-2 text-gray-400">A web application that allows users to paint on a digital canvas using hand gestures captured via webcam.</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="inline-flex items-center bg-blue-800 text-blue-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Vue.js</span>
+                        <span class="inline-flex items-center bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Real-time Video</span>
+                        <a href="https://github.com/pappykunj/AirPainting_ai" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 5: PRS System -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">PRS System</h3>
+                    <p class="mt-2 text-gray-400">A Permanent Record Storage system built using C++ file operations and Object-Oriented Programming principles.</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="inline-flex items-center bg-blue-800 text-blue-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">C++</span>
+                        <span class="inline-flex items-center bg-purple-800 text-purple-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">OOP</span>
+                        <a href="https://github.com/pappykunj/PRS" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 6: Movie Ticket Booking -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Movie Ticket Booking</h3>
+                    <p class="mt-2 text-gray-400">A public movie ticket booking program built using procedural programming and linked lists for efficient data management.</p>
+                    <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="inline-flex items-center bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">C</span>
+                        <span class="inline-flex items-center bg-blue-900 text-blue-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Linked List</span>
+                        <a href="https://github.com/pappykunj/Movie-Ticket-Booking/tree/main" target="_blank" class="text-e94560 hover:underline">GitHub Repo</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 7: Speed Limiter -->
+                <div class="glass-card p-6 flex flex-col">
+                    <h3 class="font-press-start text-sm md:text-lg text-e94560">Speed Limiter</h3>
+                    <p class="mt-2 text-gray-400">A backend service that integrates with a map REST API to display road speed limits and includes a review module.</p>
+                      <div class="mt-4 flex-grow"></div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="inline-flex items-center bg-green-800 text-green-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">Node.js</span>
+                        <span class="inline-flex items-center bg-gray-700 text-gray-200 text-xs font-bold mr-2 px-2.5 py-1 rounded-full">REST API</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 fade-in-section scroll-mt-20">
+            <h2 class="font-press-start text-2xl sm:text-3xl text-center mb-12"><span class="section-header">&lt;Contact /&gt;</span></h2>
+            <div class="glass-card p-8 max-w-2xl mx-auto text-center">
+                <p class="text-xl">Interested in collaborating or have a question? Let's connect!</p>
+                <p class="mt-4 text-xl md:text-2xl font-bold text-e94560 hover:text-white transition duration-300 break-all">
+                    <a href="mailto:angelamariagigi@gmail.com">angelamariagigi@gmail.com</a>
+                </p>
+                <div class="mt-6 flex justify-center items-center space-x-6">
+                     <a href="tel:+971582382152" class="text-gray-300 hover:text-e94560 transition duration-300 text-sm">+971 58 238 2152</a>
+                     <span class="text-gray-500">|</span>
+                     <p class="text-gray-300 text-sm">Abu Dhabi, UAE</p>
+                     <span class="text-gray-500">|</span>
+                     <a href="https://www.linkedin.com/in/angelamariagigi" target="_blank" class="text-gray-300 hover:text-e94560 transition duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                     </a>
+                </div>
+                 <div class="mt-8">
+                     <a href="mailto:angelamariagigi@gmail.com" class="pixel-btn">Send a Message</a>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 text-gray-500">
+        <p>&copy; 2025 Angela Maria Gigi. Designed with <span class="text-e94560">&lt;3</span></p>
+    </footer>
+    
+    <!-- Hidden Game Modal -->
+    <div id="game-modal">
+        <div id="game-container">
+            <h2 class="font-press-start text-xl md:text-2xl mb-4 text-white">Secret Snake Game!</h2>
+            <canvas id="snake-game"></canvas>
+            <div class="mt-4 flex justify-between items-center">
+                 <p id="score-display" class="font-press-start text-lg text-white">Score: 0</p>
+                 <div>
+                    <button id="start-game-btn" class="pixel-btn text-sm py-2 px-4">Start</button>
+                    <button id="close-game-btn" class="pixel-btn text-sm py-2 px-4 ml-2">Close</button>
+                </div>
+            </div>
+            <!-- On-screen controls for mobile -->
+            <div id="on-screen-controls" class="md:hidden">
+                 <div class="d-pad">
+                    <button id="d-pad-up" data-direction="up" class="d-pad-btn">▲</button>
+                    <button id="d-pad-left" data-direction="left" class="d-pad-btn">◄</button>
+                    <button id="d-pad-right" data-direction="right" class="d-pad-btn">►</button>
+                    <button id="d-pad-down" data-direction="down" class="d-pad-btn">▼</button>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Mobile Sidebar Logic ---
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('overlay');
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+
+        function openSidebar() {
+            mobileMenu.classList.add('open');
+            overlay.classList.add('active');
+        }
+
+        function closeSidebar() {
+            mobileMenu.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        hamburgerBtn.addEventListener('click', openSidebar);
+        overlay.addEventListener('click', closeSidebar);
+        mobileNavLinks.forEach(link => link.addEventListener('click', closeSidebar));
+
+
+        // --- Hidden Snake Game Logic ---
+        const heroCharacter = document.getElementById('hero-character');
+        const gameModal = document.getElementById('game-modal');
+        const closeGameBtn = document.getElementById('close-game-btn');
+        const startGameBtn = document.getElementById('start-game-btn');
+        const canvas = document.getElementById('snake-game');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('score-display');
+        const onScreenControls = document.getElementById('on-screen-controls');
+
+        const gridSize = 20;
+        let snake, food, score, direction, gameLoop, gameState, changingDirection;
+
+        function resizeCanvas() {
+            const container = document.getElementById('game-container');
+            const style = window.getComputedStyle(container);
+            const paddingX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+            const containerWidth = container.clientWidth - paddingX;
+            // Adjust size for mobile vs desktop
+            const maxSize = Math.min(containerWidth, 400);
+            const newSize = Math.floor(maxSize / gridSize) * gridSize;
+            
+            canvas.width = newSize;
+            canvas.height = newSize;
+        }
+
+        function initGame() {
+            snake = [{ x: 10, y: 10 }];
+            food = {};
+            score = 0;
+            direction = 'right';
+            gameState = 'playing';
+            changingDirection = false;
+            scoreDisplay.textContent = 'Score: 0';
+            startGameBtn.textContent = 'Restart';
+            generateFood();
+            if (gameLoop) clearInterval(gameLoop);
+            gameLoop = setInterval(mainLoop, 150);
+        }
+
+        function generateFood() {
+            food.x = Math.floor(Math.random() * (canvas.width / gridSize));
+            food.y = Math.floor(Math.random() * (canvas.height / gridSize));
+        }
+
+        function draw() {
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f3460';
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+            });
+
+            ctx.fillStyle = '#e94560';
+            ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+
+            if (gameState === 'gameOver') {
+                ctx.fillStyle = 'rgba(26, 26, 46, 0.75)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.font = "20px 'Press Start 2P'";
+                ctx.textAlign = 'center';
+                ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 20);
+                ctx.font = "14px 'Press Start 2P'";
+                ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
+            }
+        }
+
+        function update() {
+            if (gameState !== 'playing') return;
+            changingDirection = false; // Allow a new turn input for the next frame
+
+            const head = { ...snake[0] };
+
+            if (direction === 'right') head.x++;
+            if (direction === 'left') head.x--;
+            if (direction === 'up') head.y--;
+            if (direction === 'down') head.y++;
+
+            // Wall collision logic
+            if (head.x * gridSize >= canvas.width || head.x < 0 || head.y * gridSize >= canvas.height || head.y < 0) {
+                endGame();
+                return;
+            }
+
+            // Self collision logic
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    endGame();
+                    return;
+                }
+            }
+
+            snake.unshift(head);
+
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                generateFood();
+            } else {
+                snake.pop();
+            }
+        }
+
+        function mainLoop() {
+            update();
+            draw();
+        }
+
+        function endGame() {
+            clearInterval(gameLoop);
+            gameState = 'gameOver';
+            draw();
+        }
+
+        function setDirection(newDirection) {
+            if (gameState !== 'playing' || changingDirection) return;
+
+            const goingUp = direction === 'up';
+            const goingDown = direction === 'down';
+            const goingLeft = direction === 'left';
+            const goingRight = direction === 'right';
+
+            if (newDirection === 'up' && !goingDown) {
+                direction = 'up';
+                changingDirection = true;
+            }
+            if (newDirection === 'down' && !goingUp) {
+                direction = 'down';
+                changingDirection = true;
+            }
+            if (newDirection === 'left' && !goingRight) {
+                direction = 'left';
+                changingDirection = true;
+            }
+            if (newDirection === 'right' && !goingLeft) {
+                direction = 'right';
+                changingDirection = true;
+            }
+        }
+
+        function handleKeyDown(event) {
+            const keyPressed = event.key.toLowerCase();
+            let newDirection = null;
+
+            if (keyPressed === 'arrowup' || keyPressed === 'w') newDirection = 'up';
+            if (keyPressed === 'arrowdown' || keyPressed === 's') newDirection = 'down';
+            if (keyPressed === 'arrowleft' || keyPressed === 'a') newDirection = 'left';
+            if (keyPressed === 'arrowright' || keyPressed === 'd') newDirection = 'right';
+             
+            if(newDirection) {
+                // Prevent scrolling with arrow keys if game modal is open
+                if(gameModal.style.display === 'flex') {
+                    event.preventDefault();
+                }
+                setDirection(newDirection);
+            }
+        }
+
+        heroCharacter.addEventListener('click', () => {
+            gameModal.style.display = 'flex';
+            resizeCanvas();
+            // Slight delay to ensure canvas is rendered before drawing
+            setTimeout(draw, 50);
+        });
+
+        closeGameBtn.addEventListener('click', () => {
+            gameModal.style.display = 'none';
+            if (gameLoop) clearInterval(gameLoop);
+            gameState = 'ready';
+            startGameBtn.textContent = 'Start';
+        });
+
+        startGameBtn.addEventListener('click', (e) => {
+             // Prevent event bubbling if necessary, though not critical here
+             e.stopPropagation();
+             initGame();
+        });
+        
+        window.addEventListener('keydown', handleKeyDown);
+
+        // Event listener for on-screen controls
+        onScreenControls.addEventListener('click', (e) => {
+            if (e.target.classList.contains('d-pad-btn')) {
+                const newDirection = e.target.dataset.direction;
+                setDirection(newDirection);
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (gameModal.style.display === 'flex') {
+                resizeCanvas();
+                if (gameState) {
+                    draw();
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
